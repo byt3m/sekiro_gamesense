@@ -3,4 +3,4 @@ Python script that reads the memory of the game *Sekiro: Shadows Die Twice* to g
 
 Requires Python 3.7.3+ and a Steel Series Engine 3 compatible device.
 
-Tested on the version 1.02 of the game.
+Tested on version 1.04 of the game.
