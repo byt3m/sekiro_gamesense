@@ -33,7 +33,7 @@ modulos = m.EnumModules(pyHandle)
 BaseAddress = modulos[0]
 
 # Health
-HealthAddr = 0x3B79264 + BaseAddress
+HealthAddr = 0x3B7A2A4 + BaseAddress
 
 # Getting handle for reading and writting
 cHandle = m.GetProcessHandle(process, 0)
