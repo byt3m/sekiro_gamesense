@@ -38,31 +38,37 @@ HealthAddr = 0x3B7A2A4 + BaseAddress
 # Getting handle for reading and writting
 cHandle = m.GetProcessHandle(process, 0)
 
-Health = m.Read_UINT64(cHandle, HealthAddr)
-MaxHealth = Health
+MaxHealth = m.Read_UINT64(cHandle, HealthAddr)
 
+try:
+	while True:
 
-while True:
+		os.system("cls")
 
-	os.system("cls")
+		health = m.Read_UINT64(cHandle, HealthAddr)
+	
+		if health > MaxHealth:
+			MaxHealth = health
 
-	health = int(Porcentaje(m.Read_UINT64(cHandle, HealthAddr), MaxHealth))
+		health_percentage = int(Porcentaje(health, MaxHealth))
 
-	print("Health: %s" % health)
+		print("\n Health: " + str(health_percentage) + "%" + " = " + str(health))
 
-	EventData = {
-	"game": GAME,
-	"event": EVENT,
-	"data": {
-	  "value": health
-	  }
-	}
+		EventData = {
+		"game": GAME,
+		"event": EVENT,
+		"data": {
+	  	    "value": health_percentage
+	  	  }
+		}
 
-	GameEvent(EventData, SSE3_PORT)
+		GameEvent(EventData, SSE3_PORT)
 
-	health -= 1
+		if health <= 0:
+			print("You are dead :P.")
 
-	if health < 0:
-		print("Game Over.")		
+		time.sleep(0.6)
 
-	time.sleep(0.6)
+except KeyboardInterrupt:
+
+	m.CloseHandle(cHandle)
